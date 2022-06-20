@@ -59,6 +59,11 @@
   resolved "https://registry.npmmirror.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
 
+"@icon-park/vue-next@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npmmirror.com/@icon-park/vue-next/-/vue-next-1.4.1.tgz#e52e65aa752bd618e11704bb3d818ec0dc04c9c0"
+  integrity sha512-9Nhw9oSlQT9wCIMcixNTVAbtOfk4kkyR+0AfjW1WEZiIT0J5tE/gFksmgkENZWomjEzWCofhiF4w7dcLRhtLMw==
+
 "@juggle/resize-observer@^3.3.1":
   version "3.3.1"
   resolved "https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
