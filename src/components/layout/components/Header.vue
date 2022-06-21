@@ -8,23 +8,21 @@
             <MenuUnfold v-show="collapsed"></MenuUnfold>
           </n-icon>
           <n-breadcrumb>
-            <n-breadcrumb-item href="#/">
-              首页
+            <n-breadcrumb-item :clickable="false">
+              <n-dropdown :options="menu" @select="onBreadcrumbSelect" trigger="click">
+                首页
+              </n-dropdown>
             </n-breadcrumb-item>
-            <n-breadcrumb-item v-for="item in renderBreadcrumb($route.fullPath)" :key="item.path" :clickable="false">
-              <n-dropdown :options="item.children" v-if="item.children">
+            <n-breadcrumb-item v-for="item in renderBreadcrumb($route.fullPath)" :key="item.key" :clickable="false">
+              <n-dropdown :options="item.children" v-if="item.children" @select="onBreadcrumbSelect" trigger="click">
                 <span>
-                  <n-icon>
-                    <icon-park :type="item.icon"></icon-park>
-                  </n-icon>
+                  <RenderIcon :icon="item.icon"></RenderIcon>
                   {{ item.label }}
                 </span>
               </n-dropdown>
               <template v-else>
                 <span>
-                  <n-icon>
-                    <icon-park :type="item.icon"></icon-park>
-                  </n-icon>
+                  <RenderIcon :icon="item.icon"></RenderIcon>
                   {{ item.label }}
                 </span>
               </template>
@@ -80,11 +78,15 @@
 
 <script setup lang="ts" name="Header">
 import { MenuFold, MenuUnfold, FullScreen, OffScreen, Logout, SettingConfig } from "@icon-park/vue-next"
-import { IconPark } from "@icon-park/vue-next/es/all";
 import { renderBreadcrumb } from "@/libs/renderBreadcrumb"
+import { menu } from "@/libs/renderMenu";
 import { renderIcon } from "@/libs/renderIcon"
 import { DropdownOption } from "naive-ui";
+import RenderIcon from "@/components/RenderIcon/index.vue"
 import { ref } from "vue";
+import { useRouter } from "vue-router"
+
+const router = useRouter()
 
 defineProps<{ collapsed: boolean }>()
 defineEmits<{ (event: 'update:collapsed', value: boolean): void }>()
@@ -94,6 +96,10 @@ const option: DropdownOption[] = [
   { label: '退出登录', key: 'logout', icon: renderIcon(Logout) }
 ]
 
+//面包屑下拉菜单
+const onBreadcrumbSelect = (val: string) => {
+  router.push({ name: val })
+}
 // 全屏
 const isFullScreen = ref(false)
 const changeFullScreen = () => {
