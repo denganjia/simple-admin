@@ -13,7 +13,7 @@
                 首页
               </n-dropdown>
             </n-breadcrumb-item>
-            <n-breadcrumb-item v-for="item in renderBreadcrumb($route.fullPath)" :key="item.key" :clickable="false">
+            <n-breadcrumb-item v-for="item in renderBreadcrumb($route.name)" :key="item.key" :clickable="false">
               <n-dropdown :options="item.children" v-if="item.children" @select="onBreadcrumbSelect" trigger="click">
                 <span>
                   <RenderIcon :icon="item.icon"></RenderIcon>
@@ -34,7 +34,7 @@
         <n-space :size="5" justify="end" align="center">
           <n-tooltip placement="bottom" trigger="hover">
             <template #trigger>
-              <n-button quaternary size="small">
+              <n-button quaternary size="small" @click="showSetting = true">
                 <template v-slot:icon>
                   <n-icon>
                     <SettingConfig></SettingConfig>
@@ -71,8 +71,7 @@
       </div>
     </n-space>
   </div>
-
-
+  <Setting v-model:show="showSetting"></Setting>
 </template>
 
 
@@ -85,11 +84,17 @@ import { DropdownOption } from "naive-ui";
 import RenderIcon from "@/components/RenderIcon/index.vue"
 import { ref } from "vue";
 import { useRouter } from "vue-router"
+import { useTabStore } from "@/storages/tabBar"
+import Setting from "@/components/Setting/index.vue"
 
 const router = useRouter()
+const tabStore = useTabStore()
+
 
 defineProps<{ collapsed: boolean }>()
 defineEmits<{ (event: 'update:collapsed', value: boolean): void }>()
+//显示设置
+const showSetting = ref(false)
 
 // 下拉菜单
 const option: DropdownOption[] = [
@@ -97,7 +102,8 @@ const option: DropdownOption[] = [
 ]
 
 //面包屑下拉菜单
-const onBreadcrumbSelect = (val: string) => {
+const onBreadcrumbSelect = (val: string, option: any) => {
+  tabStore.addTab(option)
   router.push({ name: val })
 }
 // 全屏

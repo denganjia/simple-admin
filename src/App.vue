@@ -1,15 +1,27 @@
 <script setup lang="ts">
 import { DEFAULT_ICON_CONFIGS, IconProvider } from '@icon-park/vue-next';
 import LoadingBar from "@/components/LoadingBar/index.vue"
-import { darkTheme } from 'naive-ui'
-import { ref } from "vue"
+import { darkTheme, GlobalThemeOverrides, zhCN, dateZhCN } from 'naive-ui'
+import { computed, ref } from "vue"
+import { useTheme } from "@/storages/theme"
+
+const theme = useTheme()
 IconProvider({ ...DEFAULT_ICON_CONFIGS, strokeWidth: 3, strokeLinejoin: 'miter', strokeLinecap: 'square' });
 
-const isDark = ref(false)
+
+const themeOverrides = computed<GlobalThemeOverrides>(() => ({
+  common: {
+    primaryColor: theme.primaryColor,
+    primaryColorHover: theme.primaryColorHover,
+    primaryColorPressed: theme.primaryColorPressed,
+    primaryColorSuppl: theme.primaryColorHover
+  },
+}))
 </script>
 
 <template>
-  <n-config-provider :theme="isDark ? darkTheme : null">
+  <n-config-provider :theme="theme.darkTheme ? darkTheme : null" :theme-overrides="themeOverrides" :locale="zhCN"
+    :date-locale="dateZhCN">
     <n-loading-bar-provider>
       <n-dialog-provider>
         <n-notification-provider>

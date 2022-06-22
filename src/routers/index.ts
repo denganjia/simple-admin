@@ -3,13 +3,13 @@ import { createWebHashHistory, createRouter, RouteRecordRaw } from "vue-router";
 export const routes: RouteRecordRaw[] = [
 	{
 		path: "/",
-		name: "index",
-		redirect: "/dashboard",
+		name: "main",
+		redirect: { name: "index" },
 		component: () => import("@/components/layout/index.vue"),
 		children: [
 			{
-				path: "dashboard",
-				name: "dashboard",
+				path: "index",
+				name: "index",
 				component: () => import("@/views/Dashboard/index.vue"),
 				meta: { title: "主控台", icon: "bill" },
 			},

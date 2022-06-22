@@ -1,4 +1,5 @@
 import { MenuOption } from "naive-ui";
+import { RouteRecordName } from "vue-router";
 // import { RouteRecordRaw } from "vue-router";
 // import { routes } from "../routers/index";
 import { menu } from "./renderMenu";
@@ -36,27 +37,55 @@ import { menu } from "./renderMenu";
 
 // 	return breadcrumbArr;
 // };
-
-export const renderBreadcrumb = (path: string): MenuOption[] => {
-	const pathlist = path.split("/").slice(1);
-	const maxIndent = pathlist.length - 1;
-	let indent = 0;
-	let res: MenuOption[] = [];
-	const getNodePath = (menu: MenuOption) => {
-		if (indent > maxIndent) indent = maxIndent;
-		if (menu.key === pathlist[indent]) {
+export const renderBreadcrumb = (routename?: string | null | undefined | symbol | RouteRecordName) => {
+	if (!routename) {
+		console.error("Function `renderbreadcrumb` needs to receive a parameter");
+		return [];
+	}
+	const res: MenuOption[] = [];
+	try {
+		const getNodePath = (menu: MenuOption) => {
 			res.push(menu);
-		}
-		if (menu.children && menu.children.length > 0) {
-			indent++;
-			menu.children.forEach(m => {
-				getNodePath(m);
-			});
-		}
-	};
-	menu.forEach(m => {
-		indent = 0;
-		getNodePath(m);
-	});
-	return res;
+			if (menu.key === routename) {
+				throw new Error("Find It");
+			}
+			if (menu.children && menu.children.length > 0) {
+				menu.children.forEach(m => getNodePath(m));
+				res.pop();
+			} else {
+				res.pop();
+			}
+		};
+		menu.forEach(m => {
+			getNodePath(m);
+			res.length = 0;
+		});
+	} catch (err) {
+		return res;
+	}
 };
+// export const renderBreadcrumb = (path: string): MenuOption[] => {
+// 	const pathlist = path.split("/").slice(1);
+
+// 	const maxIndent = pathlist.length - 1;
+// 	let indent = 0;
+// 	let res: MenuOption[] = [];
+// 	const getNodePath = (menu: MenuOption) => {
+// 		if (indent > maxIndent) indent = maxIndent;
+// 		if (menu.key === pathlist[indent]) {
+// 			res.push(menu);
+// 		}
+// 		if (menu.children && menu.children.length > 0) {
+// 			indent++;
+// 			menu.children.forEach(m => {
+// 				getNodePath(m);
+// 			});
+// 		}
+// 	};
+// 	menu.forEach(m => {
+// 		indent = 0;
+// 		getNodePath(m);
+// 	});
+
+// 	return res;
+// };

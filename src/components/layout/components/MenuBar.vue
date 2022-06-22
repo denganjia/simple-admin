@@ -1,7 +1,8 @@
 <template>
   <div class="menuHeader">Vue-Naive-Admin</div>
   <n-divider />
-  <n-menu :options="menu" inverted v-model:value="activeMenu" accordion v-model:expanded-keys="expandKeys"></n-menu>
+  <n-menu :options="menu" v-model:value="activeMenu" @update:value="updateMenu" accordion
+    v-model:expanded-keys="expandKeys"></n-menu>
 
 </template>
 
@@ -10,6 +11,10 @@
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { menu } from "@/libs/renderMenu"
+import { MenuOption } from 'naive-ui';
+import { useTabStore } from '@/storages/tabBar';
+
+const tabStore = useTabStore()
 const route = useRoute()
 const router = useRouter()
 // 当前激活的menu
@@ -21,7 +26,10 @@ const activeMenu = computed({
     router.push({ name: val as string })
   }
 })
-
+// 监听menu更新，将数据添加到tabStore
+const updateMenu = (val: string, item: MenuOption) => {
+  tabStore.addTab(item)
+}
 // 控制展开的menu
 const expandKeys = ref<string[]>([])
 
@@ -45,9 +53,7 @@ defineProps<{ collapsed: boolean }>()
 .menuHeader {
   font-size: 24px;
   text-align: center;
-  color: #dadada;
+  color: var(--n-text-color);
   padding-top: 41px;
-  // line-height: 50px;
-  // height: 50px;
 }
 </style>

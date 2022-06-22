@@ -8,13 +8,13 @@ const renderMenu = (routes: RouteRecordRaw[], arr: MenuOption[] = []) => {
 		if (!route.children) {
 			arr.push({
 				label: route.meta?.title ?? route.path,
-				key: route.path,
+				key: route.name as string,
 				icon: renderIcon(route.meta!.icon! as string),
 			});
 		} else {
 			let option: MenuOption = {
 				label: route.meta?.title ?? route.path,
-				key: route.path,
+				key: route.name as string,
 				children: [],
 				icon: renderIcon(route.meta!.icon! as string),
 			};
