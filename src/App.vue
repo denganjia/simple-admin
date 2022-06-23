@@ -27,7 +27,11 @@ const themeOverrides = computed<GlobalThemeOverrides>(() => ({
         <n-notification-provider>
           <n-message-provider>
             <loading-bar></loading-bar>
-            <router-view></router-view>
+            <router-view v-slot="{ Component }">
+              <transition name="fade" mode="out-in">
+                <component :is="Component" />
+              </transition>
+            </router-view>
           </n-message-provider>
         </n-notification-provider>
       </n-dialog-provider>
@@ -37,4 +41,14 @@ const themeOverrides = computed<GlobalThemeOverrides>(() => ({
 </template>
 
 <style>
+/* 下面我们会解释这些 class 是做什么的 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

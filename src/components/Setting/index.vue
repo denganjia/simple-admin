@@ -30,12 +30,39 @@
         '#F0A020',
       ]" :modes="['hex', 'rgb']" :default-value="theme.themeOverrides.primaryColor" @confirm="setColor"
         :actions="['confirm']" />
+      <n-divider>
+        导航栏风格
+      </n-divider>
+      <n-radio-group style="width: 100%;" v-model:value="theme.navBarStyle">
+        <n-space justify="space-around">
+          <n-space vertical align="center">
+            <n-tooltip>
+              <template v-slot:trigger>
+                <n-image :src="dark" preview-disabled></n-image>
+              </template>
+              暗色侧边栏
+            </n-tooltip>
+            <n-radio value='dark'></n-radio>
+          </n-space>
+          <n-space vertical align="center">
+            <n-tooltip>
+              <template v-slot:trigger>
+                <n-image :src="light" preview-disabled></n-image>
+              </template>
+              白色侧边栏
+            </n-tooltip>
+            <n-radio value='light'></n-radio>
+          </n-space>
+        </n-space>
+      </n-radio-group>
     </n-drawer-content>
   </n-drawer>
 </template>
 
 
 <script setup lang="ts">
+import dark from "@/assets/imgs/nav-theme-dark.svg"
+import light from "@/assets/imgs/nav-theme-light.svg"
 import { computed } from 'vue';
 import { useTheme } from '@/storages/theme';
 const theme = useTheme()

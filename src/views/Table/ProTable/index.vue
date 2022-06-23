@@ -1,6 +1,5 @@
 <template>
-  使用ProTable的数据表格
-
+  <p>使用ProTable的数据表格</p>
 </template>
 
 

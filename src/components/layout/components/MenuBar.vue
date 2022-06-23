@@ -2,7 +2,7 @@
   <div class="menuHeader">Vue-Naive-Admin</div>
   <n-divider />
   <n-menu :options="menu" v-model:value="activeMenu" @update:value="updateMenu" accordion
-    v-model:expanded-keys="expandKeys"></n-menu>
+    v-model:expanded-keys="expandKeys" :inverted="theme.navBarStyle === 'dark'"></n-menu>
 
 </template>
 
@@ -13,7 +13,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { menu } from "@/libs/renderMenu"
 import { MenuOption } from 'naive-ui';
 import { useTabStore } from '@/storages/tabBar';
+import { useTheme } from '@/storages/theme';
 
+const theme = useTheme()
 const tabStore = useTabStore()
 const route = useRoute()
 const router = useRouter()
@@ -27,8 +29,8 @@ const activeMenu = computed({
   }
 })
 // 监听menu更新，将数据添加到tabStore
-const updateMenu = (val: string, item: MenuOption) => {
-  tabStore.addTab(item)
+const updateMenu = (val: string, item: Required<MenuOption>) => {
+  tabStore.addTab({ label: item.label as string, key: item.key as string })
 }
 // 控制展开的menu
 const expandKeys = ref<string[]>([])

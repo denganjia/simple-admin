@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { MenuOption } from "naive-ui";
-type Tab = Pick<MenuOption, "label" | "key"> & { closable?: boolean };
+type Tab = { label: string; key: string; closable?: boolean };
 export const useTabStore = defineStore("tabBar", {
 	state: (): { tablist: Tab[]; activeTab: Tab } => ({
 		tablist: [{ label: "主控台", key: "index", closable: false }],
@@ -11,7 +11,7 @@ export const useTabStore = defineStore("tabBar", {
 		active: state => state.activeTab,
 	},
 	actions: {
-		addTab(payload: MenuOption) {
+		addTab(payload: Tab) {
 			let isInTabList = false;
 			this.tablist.forEach(tab => {
 				if (tab.key === payload.key) isInTabList = true;
@@ -34,12 +34,26 @@ export const useTabStore = defineStore("tabBar", {
 		},
 		removeTab(name: string) {
 			const index = this.tablist.findIndex(tab => tab.label === name);
-			if (this.active === this.tablist[index].label) {
+			if (this.active.key === this.tablist[index].key) {
 				if (index > 0) {
 					this.activeTab = this.tablist[index - 1];
 				}
 			}
 			this.tablist.splice(index, 1);
+		},
+		closeTab(action: "all" | "current" | "other") {
+			if (action === "all") {
+				this.tablist = this.tablist.slice(0, 1);
+				this.activeTab = this.tablist[0];
+			}
+			if (action === "current") {
+				if (this.active.key === this.tablist[0].key) return;
+				this.removeTab(this.active.label);
+			}
+			if (action === "other") {
+				this.tablist = this.tablist.slice(0, 1);
+				this.tablist.push(this.active);
+			}
 		},
 	},
 	persist: true,

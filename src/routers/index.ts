@@ -17,6 +17,7 @@ export const routes: RouteRecordRaw[] = [
 				path: "table",
 				name: "table",
 				component: () => import("@/components/Empty/index.vue"),
+				// redirect: "/table/pro-table",
 				meta: { title: "表格页", icon: "like" },
 				children: [
 					{
@@ -28,34 +29,20 @@ export const routes: RouteRecordRaw[] = [
 				],
 			},
 			{
-				path: "form",
-				name: "form",
-				component: () => import("@/components/Empty/index.vue"),
-				meta: { title: "表单页", icon: "like" },
-				children: [
-					{
-						path: "base-form",
-						name: "base-form",
-						component: () => import("@/components/Empty/index.vue"),
-						meta: { title: "基础表单", icon: "loading" },
-						children: [
-							{
-								path: "base-form-login",
-								name: "base-form-login",
-								component: () => import("@/views/Table/ProTable/index.vue"),
-								meta: { title: "基础登录表单", icon: "login" },
-							},
-						],
-					},
-					{
-						path: "validate-form",
-						name: "validate-form",
-						component: () => import("@/views/Table/ProTable/index.vue"),
-						meta: { title: "校验表单", icon: "square" },
-					},
-				],
+				path: "about",
+				name: "about",
+				component: () => import("@/views/About/index.vue"),
+				meta: {
+					title: "关于",
+					icon: "doc-detail",
+				},
 			},
 		],
+	},
+	{
+		path: "/login",
+		name: "login",
+		component: () => import("@/views/Login/index.vue"),
 	},
 ];
 

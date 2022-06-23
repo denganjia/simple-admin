@@ -1,6 +1,9 @@
 <template>
-  主控台
-
+  <div>
+    <p v-for="item in 60">
+      呜呜呜{{ item }}
+    </p>
+  </div>
 </template>
 
 

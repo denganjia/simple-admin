@@ -13,6 +13,7 @@ export const useTheme = defineStore("theme", {
 		primaryColor: "#18A058",
 		primaryColorHover: "#36ad6a",
 		primaryColorPressed: "#0c7a43",
+		navBarStyle: "dark",
 	}),
 	getters: {
 		darkTheme(state) {

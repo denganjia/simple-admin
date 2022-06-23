@@ -1,19 +1,21 @@
 <template>
   <n-layout has-sider style="height: 100vh;">
     <n-layout-sider width="250" show-trigger="bar" :show-collapsed-content="false" :collapsed-width="0"
-      v-model:collapsed="collapsed" bordered :native-scrollbar="false">
+      v-model:collapsed="collapsed" bordered :native-scrollbar="false" :inverted="theme.navBarStyle === 'dark'">
       <MenuBar :collapsed="collapsed"></MenuBar>
     </n-layout-sider>
     <n-layout :native-scrollbar="false">
       <n-layout-header>
         <Header v-model:collapsed="collapsed"></Header>
         <TabBar></TabBar>
-
-
       </n-layout-header>
       <n-layout-content embedded :content-style="contentStyle">
         <div class="content">
-          <router-view></router-view>
+          <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </div>
       </n-layout-content>
       <!-- <n-layout-footer embeded>
@@ -32,9 +34,10 @@ import TabBar from "./components/TabBar.vue"
 import { ref, CSSProperties, computed, watch } from "vue"
 import { useTheme } from '@/storages/theme';
 import { useTabStore } from '@/storages/tabBar';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
+const router = useRouter()
 const tabStore = useTabStore()
 // tabs color
 const theme = useTheme()
@@ -51,19 +54,27 @@ const contentStyle: CSSProperties = {
 
 //监听路由变化 设置激活的tab
 watch(() => route.name, (n) => {
-  tabStore.setActiveTab(n as string)
+  if (tabStore.active.key !== n) {
+    tabStore.setActiveTab(n as string)
+  }
 }, { immediate: true })
+
+// 监听activeTab变化 设置路由
+watch(() => tabStore.active, (n) => {
+  if (n.key !== route.name) {
+    router.push({ name: n.key as string })
+  }
+})
 </script>
 
 
 <style scoped lang="scss">
 :deep(.n-tabs .n-tabs-nav.n-tabs-nav--card-type .n-tabs-tab.n-tabs-tab--active) {
-  background-color: v-bind(color);
-  border-bottom: 1px solid v-bind(color);
+  border-bottom: 1px solid var(--n-tab-border-color);
 }
 
 .content {
-  height: 100%;
+  min-height: 100%;
   background-color: v-bind(contentColor);
   box-sizing: border-box;
   padding: 10px;

@@ -58,7 +58,7 @@
             <span>全屏</span>
           </n-tooltip>
 
-          <n-dropdown trigger="hover" :options="option">
+          <n-dropdown trigger="hover" :options="option" @select="userSelect">
             <n-button quaternary>
               <n-space align="center">
                 <n-avatar round size="small" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
@@ -100,12 +100,19 @@ const showSetting = ref(false)
 const option: DropdownOption[] = [
   { label: '退出登录', key: 'logout', icon: renderIcon(Logout) }
 ]
+// 用户下拉菜单选择
+const userSelect = (key: string) => {
+  if (key === 'logout') {
+    router.push('/login')
+  }
+}
 
-//面包屑下拉菜单
+//面包屑下拉菜单选择
 const onBreadcrumbSelect = (val: string, option: any) => {
   tabStore.addTab(option)
   router.push({ name: val })
 }
+
 // 全屏
 const isFullScreen = ref(false)
 const changeFullScreen = () => {
