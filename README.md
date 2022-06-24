@@ -29,7 +29,7 @@ Simple Admin 是一款基于 Vue3，Vite2，Typescript，NaiveUI 的基础后台
 ## 立即使用
 - 克隆代码
 ```bash
-git clone https://github.com/denganjia/vue3-naiveui-admin-template.git
+git clone https://github.com/denganjia/simple-admin.git
 ```
 - 安装依赖
 ```
