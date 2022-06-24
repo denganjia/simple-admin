@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^1.6.1",
     "vue": "^3.2.25",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@icon-park/vue-next": "^1.4.1",
+    "@types/node": "^18.0.0",
     "@vitejs/plugin-vue": "^2.2.0",
     "naive-ui": "^2.30.4",
     "sass": "^1.52.3",

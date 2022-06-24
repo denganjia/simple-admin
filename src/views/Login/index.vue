@@ -1,6 +1,5 @@
 <template>
   <div class="main" :style="{ '--bg-color': color.bg, '--form-color': color.form }">
-    <!-- <img class="login-bg" src="../../assets/images/login-bg.jpg" alt="" /> -->
     <div class="login-form">
       <p class="title" :style="{ color: theme.primaryColor }">Simple Admin</p>
       <div class="form-content">
@@ -18,7 +17,6 @@
             </n-button>
           </n-form-item>
           <n-form-item>
-            <n-button text type="primary"> 忘记密码? </n-button>
           </n-form-item>
         </n-form>
       </div>
@@ -27,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from "@/storages/theme"
+import { useTheme } from "@/storages"
 import { computed, reactive, ref } from "vue";
 import {
   useMessage, FormInst
