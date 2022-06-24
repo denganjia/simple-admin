@@ -32,8 +32,7 @@ import MenuBar from './components/MenuBar.vue';
 import Header from "./components/Header.vue";
 import TabBar from "./components/TabBar.vue"
 import { ref, CSSProperties, computed, watch } from "vue"
-import { useTheme } from '@/storages/theme';
-import { useTabStore } from '@/storages/tabBar';
+import { useTheme, useTabStore } from '@/storages';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
@@ -41,7 +40,6 @@ const router = useRouter()
 const tabStore = useTabStore()
 // tabs color
 const theme = useTheme()
-const color = computed(() => (theme.darkTheme ? "#101014" : '#f4f4f6'))
 
 const contentColor = computed(() => (theme.darkTheme ? "#18181c" : '#fff'))
 const collapsed = ref(false)

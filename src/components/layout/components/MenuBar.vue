@@ -1,9 +1,8 @@
 <template>
-  <div class="menuHeader">Vue-Naive-Admin</div>
-  <n-divider />
+  <div class="menuHeader">Simple Admin</div>
+  <!-- <n-divider /> -->
   <n-menu :options="menu" v-model:value="activeMenu" @update:value="updateMenu" accordion
     v-model:expanded-keys="expandKeys" :inverted="theme.navBarStyle === 'dark'"></n-menu>
-
 </template>
 
 
@@ -12,8 +11,11 @@ import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { menu } from "@/libs/renderMenu"
 import { MenuOption } from 'naive-ui';
-import { useTabStore } from '@/storages/tabBar';
-import { useTheme } from '@/storages/theme';
+import { useTabStore, useTheme, useBreadcrumbStore } from '@/storages';
+
+// 首次进入时会设置面包屑缓存，避免每次切换路由重新查找面包屑
+const breadcrumbStore = useBreadcrumbStore()
+breadcrumbStore.init(menu)
 
 const theme = useTheme()
 const tabStore = useTabStore()
@@ -56,6 +58,11 @@ defineProps<{ collapsed: boolean }>()
   font-size: 24px;
   text-align: center;
   color: var(--n-text-color);
-  padding-top: 41px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--n-border-color);
+  box-sizing: border-box;
 }
 </style>

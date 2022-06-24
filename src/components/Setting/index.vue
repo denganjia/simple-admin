@@ -29,7 +29,7 @@
         '#2080F0',
         '#F0A020',
       ]" :modes="['hex', 'rgb']" :default-value="theme.themeOverrides.primaryColor" @confirm="setColor"
-        :actions="['confirm']" />
+        :actions="['confirm']"  :show-alpha="false"/>
       <n-divider>
         导航栏风格
       </n-divider>
@@ -64,7 +64,7 @@
 import dark from "@/assets/imgs/nav-theme-dark.svg"
 import light from "@/assets/imgs/nav-theme-light.svg"
 import { computed } from 'vue';
-import { useTheme } from '@/storages/theme';
+import { useTheme } from '@/storages';
 const theme = useTheme()
 const props = defineProps<{ show: boolean }>()
 const emits = defineEmits<{ (e: 'update:show', val: boolean): void }>()
@@ -78,8 +78,6 @@ const showDrawer = computed({
   }
 })
 const setColor = (val: string) => {
-  console.log(val);
-
   theme.setPrimaryColor(val)
 }
 </script>

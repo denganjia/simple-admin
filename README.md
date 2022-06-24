@@ -1,11 +1,45 @@
-# Vue 3 + Typescript + Vite
+# Simple Admin
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 简介
 
-## Recommended IDE Setup
+Simple Admin 是一款基于 Vue3，Vite2，Typescript，NaiveUI 的基础后台管理模板，重点在于基础，用户权限需要你自己根据公司业务处理，其他的我都帮你做好了😁
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+## 特性
 
-## Type Support For `.vue` Imports in TS
+- 根据路由自动生成`menu`侧边导航和面包屑
+- 可自己调整主题
+- 全量使用`typescript`
+- 基于`axios`的请求函数封装
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+## 预览
+
+## 项目文档
+
+## 代码仓库
+
+## 更新日志
+
+## 开发计划
+
+- [x] 自动处理侧边导航和面包屑
+- [x] 自定义主题
+- [ ] 路由权限设置
+- [ ] axios 请求函数封装
+
+## 立即使用
+- 克隆代码
+```bash
+git clone https://github.com/denganjia/vue3-naiveui-admin-template.git
+```
+- 安装依赖
+```
+yarn
+```
+- 运行
+```
+yarn dev
+```
+- 打包
+```
+yarn build
+```

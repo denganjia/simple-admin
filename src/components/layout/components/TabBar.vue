@@ -1,5 +1,5 @@
 <template>
-  <n-tabs type="card" size="small" :tabs-padding="20" :value="tabStore.active.label" @close="close">
+  <n-tabs type="card" size="small" :tabs-padding="15" :value="tabStore.active.label" @close="close">
     <n-tab style="min-width: 60px;" v-for="tab in tabStore.list" :key="tab.key" :name="tab.label" @click="click(tab)"
       :closable="tab.closable">
     </n-tab>
@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { ArrowCircleDown } from "@icon-park/vue-next"
 import { MenuOption, TabsProps } from 'naive-ui';
-import { useTabStore } from "@/storages/tabBar"
+import { useTabStore } from "@/storages"
 import { useRouter } from "vue-router"
 
 

@@ -52,7 +52,9 @@ export const useTabStore = defineStore("tabBar", {
 			}
 			if (action === "other") {
 				this.tablist = this.tablist.slice(0, 1);
-				this.tablist.push(this.active);
+				if (this.active.key !== "index") {
+					this.tablist.push({ ...this.active, closable: true });
+				}
 			}
 		},
 	},

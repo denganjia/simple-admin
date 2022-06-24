@@ -3,7 +3,7 @@ import { DEFAULT_ICON_CONFIGS, IconProvider } from '@icon-park/vue-next';
 import LoadingBar from "@/components/LoadingBar/index.vue"
 import { darkTheme, GlobalThemeOverrides, zhCN, dateZhCN } from 'naive-ui'
 import { computed, ref } from "vue"
-import { useTheme } from "@/storages/theme"
+import { useTheme } from "@/storages"
 
 const theme = useTheme()
 IconProvider({ ...DEFAULT_ICON_CONFIGS, strokeWidth: 3, strokeLinejoin: 'miter', strokeLinecap: 'square' });

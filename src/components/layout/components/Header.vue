@@ -13,7 +13,8 @@
                 首页
               </n-dropdown>
             </n-breadcrumb-item>
-            <n-breadcrumb-item v-for="item in renderBreadcrumb($route.name)" :key="item.key" :clickable="false">
+            <n-breadcrumb-item v-for="item in breadcrumbStore.get($route.name as string)" :key="item.key"
+              :clickable="false">
               <n-dropdown :options="item.children" v-if="item.children" @select="onBreadcrumbSelect" trigger="click">
                 <span>
                   <RenderIcon :icon="item.icon"></RenderIcon>
@@ -77,19 +78,18 @@
 
 <script setup lang="ts" name="Header">
 import { MenuFold, MenuUnfold, FullScreen, OffScreen, Logout, SettingConfig } from "@icon-park/vue-next"
-import { renderBreadcrumb } from "@/libs/renderBreadcrumb"
 import { menu } from "@/libs/renderMenu";
 import { renderIcon } from "@/libs/renderIcon"
 import { DropdownOption } from "naive-ui";
 import RenderIcon from "@/components/RenderIcon/index.vue"
 import { ref } from "vue";
 import { useRouter } from "vue-router"
-import { useTabStore } from "@/storages/tabBar"
+import { useTabStore, useBreadcrumbStore } from "@/storages"
 import Setting from "@/components/Setting/index.vue"
 
 const router = useRouter()
 const tabStore = useTabStore()
-
+const breadcrumbStore = useBreadcrumbStore()
 
 defineProps<{ collapsed: boolean }>()
 defineEmits<{ (event: 'update:collapsed', value: boolean): void }>()
