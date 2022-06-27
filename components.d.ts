@@ -45,6 +45,7 @@ declare module '@vue/runtime-core' {
     NTab: typeof import('naive-ui')['NTab']
     NTabs: typeof import('naive-ui')['NTabs']
     NTooltip: typeof import('naive-ui')['NTooltip']
+    Provider: typeof import('./src/components/Provider/index.vue')['default']
     RenderIcon: typeof import('./src/components/RenderIcon/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

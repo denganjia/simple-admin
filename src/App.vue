@@ -4,6 +4,7 @@ import LoadingBar from "@/components/LoadingBar/index.vue"
 import { darkTheme, GlobalThemeOverrides, zhCN, dateZhCN } from 'naive-ui'
 import { computed, ref } from "vue"
 import { useTheme } from "@/storages"
+import Provider from "@/components/Provider/index.vue"
 
 const theme = useTheme()
 IconProvider({ ...DEFAULT_ICON_CONFIGS, strokeWidth: 3, strokeLinejoin: 'miter', strokeLinecap: 'square' });
@@ -26,6 +27,7 @@ const themeOverrides = computed<GlobalThemeOverrides>(() => ({
       <n-dialog-provider>
         <n-notification-provider>
           <n-message-provider>
+            <Provider></Provider>
             <loading-bar></loading-bar>
             <router-view v-slot="{ Component }">
               <transition name="fade" mode="out-in">
