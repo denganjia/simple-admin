@@ -30,3 +30,12 @@ export declare namespace UserManager {
     createTime: number;
   };
 }
+
+export interface MockData {
+	id: number;
+	name: string;
+	age: number;
+	city: string;
+	avatar: string;
+	gender: number;
+}

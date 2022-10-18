@@ -52,3 +52,11 @@ export const router = createRouter({
 	strict: true,
 	scrollBehavior: () => ({ left: 0, top: 0 }),
 });
+
+// router.beforeEach((to, from, next) => {
+// 	if (localStorage.getItem("access-token")) {
+// 		next();
+// 	} else {
+// 		next({ name: "login" });
+// 	}
+// });

@@ -23,7 +23,7 @@ export default defineConfig({
 		open: true,
 		proxy: {
 			"/api": {
-				target: "http://127.0.0.1:5000",
+				target: "https://www.fastmock.site/mock/a581e723f7b30c50a56ca20b0d19c4cb/simple-admin",
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, ""),
 			},
